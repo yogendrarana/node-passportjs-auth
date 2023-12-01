@@ -5,7 +5,7 @@ import * as authControllers from "../controllers/authControllers.js";
 const router = express.Router();
 
 // register
-router.post("/login", passport.authenticate("local", { failureMessage: "Invalid credentials" }), authControllers.loginUser);
+router.post("/login", passport.authenticate("local", { successRedirect: '/' }), authControllers.loginUser);
 router.post("/register", authControllers.registerUser);
 
 export default router;
