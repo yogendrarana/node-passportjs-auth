@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 import express from "express";
 import passport from "passport";
 import cookieParser from "cookie-parser";
-import expressSession from "express-session";
 import { connectDB } from "./config/database/database.js";
 import ErrorMiddleware from "./middlewares/errorMiddleware.js";
+import sessionMiddleware from "./middlewares/sessionMiddleware.js";
 import { initializeLocalStrategy } from "./config/passport/localStrategy.js";
 
 // import routes
 import authRoutes from "./routes/authRoutes.js";
-import adminRoutes from "./routes/adminRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 // create express instance
 const app = express();
@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // expressSession should be used before passport.session() and passport.initialize()
-app.use(expressSession({ secret: "secret", resave: false, saveUninitialized: false }));
+app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -44,11 +44,11 @@ app.set("views", "views"); //optional
 app.get("/", (_, res) => res.render('home'))
 app.get("/login", (_, res) => res.render('login'))
 app.get("/register", (_, res) => res.render('register'))
-app.get("/dashboard", (_, res) => res.render('dashboard'))
+
 
 // routes for api
 app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/admin", adminRoutes);
+app.use("/api/v1/user", userRoutes);
 
 // listen on port 8000
 app.listen(8000, () => {

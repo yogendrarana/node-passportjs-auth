@@ -2,6 +2,12 @@ import { UserModel } from '../models/userModel.js'
 import ErrorHandler from '../util/errorHandler.js'
 import { asyncHandler } from '../util/asyncHandler.js'
 
+// login user
+export const loginUser = asyncHandler(async (req, res, next) => {
+    res.status(200).json({ status: 'success', message: "Login successful.", data: { user: req.user } })
+})
+
+
 // register user
 export const registerUser = asyncHandler(async (req, res, next) => {
     const { username:email, password } = req.body;
@@ -18,7 +24,3 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 })
 
 
-// login user
-export const loginUser = asyncHandler(async (req, res, next) => {
-    res.status(200).json({ status: 'success', message: "Login successful.", data: { user: req.user } })
-})
