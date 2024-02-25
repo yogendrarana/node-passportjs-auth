@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import { connectDB } from "./config/database/database.js";
 import ErrorMiddleware from "./middlewares/errorMiddleware.js";
 import sessionMiddleware from "./middlewares/sessionMiddleware.js";
+// import { initializeJwtStrategy } from "./config/passport/jwtStrategy.js";
 import { initializeLocalStrategy } from "./config/passport/localStrategy.js";
 
 // import routes
@@ -23,6 +24,7 @@ connectDB();
 
 // passport-js strategy
 initializeLocalStrategy();
+// initializeJwtStrategy();
 
 // middlewares
 app.use(cors());

@@ -1,5 +1,6 @@
 import express from "express";
-import { authMiddleware } from "../middlewares/authMiddleware.js";
+import passport from "passport";
+import { authMiddleware } from "../middlewares/authMiddlewareLocalStrategy.js";
 
 const router = express.Router();
 

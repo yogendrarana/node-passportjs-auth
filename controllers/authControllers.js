@@ -10,7 +10,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
 
 // register user
 export const registerUser = asyncHandler(async (req, res, next) => {
-    const { username:email, password } = req.body;
+    const { username: email, password } = req.body;
 
     if (!email || !password) return next(new ErrorHandler("Please provide an email and password.", 400))
 
@@ -23,4 +23,12 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     res.status(201).json({ status: 'success', message: "Account created successfully.", data: { user } })
 })
 
-
+// logout user
+export const logoutUser = asyncHandler(async (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.redirect('/login');
+    });
+})
