@@ -3,19 +3,19 @@ import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { UserModel } from "../../models/userModel.js";
 import ErrorHandler from "../../util/errorHandler.js";
 
-// jwt options
-const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: "jwtsecret"
-}
-
 // initialize jwt strategy
 export function initializeJwtStrategy() {
+    // jwt options
+    const options = {
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+        secretOrKey: "jwtsecret"
+    }
+
     // jwt strategy
-    passport.use(new JwtStrategy(jwtOptions, async (jwtPayload, done) => {
-        // jwtPayload is the decoded jwt token
+    // jwtPayload is the decoded jwt token
+    passport.use(new JwtStrategy(options, async (jwtPayload, done) => {
         try {
-            const user = await UserModel.findOne({ email: username });
+            const user = await UserModel.findById(jwtPayload._id);
 
             if (!user) {
                 return done(new ErrorHandler("User does not exist", 400), false);

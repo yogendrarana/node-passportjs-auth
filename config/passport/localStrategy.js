@@ -11,11 +11,11 @@ export const initializeLocalStrategy = () => {
 
                 if (!user) {
                     return done(new ErrorHandler("User does not exist", 400), false);
-                } 
+                }
 
                 if (user.password !== password) {
                     return done(new ErrorHandler("Password do not match", 400), false);
-                } 
+                }
 
                 return done(null, user);
             } catch (error) {

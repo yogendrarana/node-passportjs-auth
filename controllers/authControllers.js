@@ -32,3 +32,28 @@ export const logoutUser = asyncHandler(async (req, res, next) => {
         res.redirect('/login');
     });
 })
+
+
+// google auth
+// this function redirects user to google's consent screen
+//  we can also achieve this by using passport.authenticate('google', { scope: ['profile', 'email'] })
+export const googleAuth = (req, res) => {
+    const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+
+    const options = {
+        redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        response_type: "code",
+        prompt: "consent",
+        scope: [
+            "https://www.googleapis.com/auth/userinfo.profile",
+            "https://www.googleapis.com/auth/userinfo.email",
+        ].join(" "),
+    };
+
+    const queryString = new URLSearchParams(options);
+
+    const url = `${rootUrl}?${queryString.toString()}`
+
+    res.redirect(url);
+}
