@@ -5,16 +5,16 @@ import morgan from "morgan";
 import express from "express";
 import passport from "passport";
 import cookieParser from "cookie-parser";
-import { connectDB } from "./config/database/database.js";
-import ErrorMiddleware from "./middlewares/errorMiddleware.js";
-import sessionMiddleware from "./middlewares/sessionMiddleware.js";
-import { initializeLocalStrategy } from "./config/passport/localStrategy.js";
-import { initializeGoogleOauth2Strategy } from "./config/passport/googleOauth2Strategy.js";
+import { connectDB } from "./src/config/database/database.js";
+import ErrorMiddleware from "./src/middlewares/errorMiddleware.js";
+import sessionMiddleware from "./src/middlewares/sessionMiddleware.js";
+import { initializeLocalStrategy } from "./src/config/passport/localStrategy.js";
+import { initializeGoogleOauth2Strategy } from "./src/config/passport/googleOauth2Strategy.js";
 
 
 // import routes
-import authRoutes from "./routes/authRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./src/routes/authRoutes.js";
+import userRoutes from "./src/routes/userRoutes.js";
 
 
 // create express instance
